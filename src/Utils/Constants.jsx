@@ -2,9 +2,11 @@ export const loginUrl = "login"
 export const profileUrl = "profile/view"
 
 export const ApiEndPoints = {
-    loginUrl : "login",
-    profileUrl : "profile/view",
-    logoutUrl: "logout"
+    signupUrl: "signup",
+    loginUrl: "login",
+    profileUrl: "profile/view",
+    logoutUrl: "logout",
+    feedUrl : "feed"
 }
 
 export const Routes = {
@@ -12,5 +14,4 @@ export const Routes = {
     profile : "/profile",
     login: "/login",
     feed: "/feed",
-  
 }
