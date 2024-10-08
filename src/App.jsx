@@ -7,9 +7,12 @@ import {
 import Body from './Components/Body';
 import Login from './Components/Login';
 import Profile from './Components/Profile';
+import { Provider } from 'react-redux';
+import AppStore from './Store/AppStore';
 function App() {
   return (
     <>
+    <Provider store={AppStore}>
       <BrowserRouter basename='/'>
         <Routes>
           <Route path='/' element={
@@ -20,6 +23,7 @@ function App() {
           </Route>
         </Routes>
       </BrowserRouter>
+    </Provider>
     </>
   )
 }
