@@ -11,3 +11,7 @@ Currently, two official plugins are available:
 vite
 daisy UI 
 Tailwind
+Body- 
+ -Navbar
+ -feed
+ 
