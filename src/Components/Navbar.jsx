@@ -1,12 +1,30 @@
-import { useSelector } from "react-redux"
-
+import { useDispatch, useSelector } from "react-redux"
+import { Link } from "react-router-dom"
+import { Routes, ApiEndPoints } from "../Utils/Constants"
+import { removeUser } from "../Store/userSlice"
+import Cookies from 'js-cookie';
+import axios from "axios";
+import { environment } from "../Environment/environment";
 const Navbar = () => {
     const user = useSelector((store)=> store.user)
+    const Dispatch = useDispatch()
+    const handleLogout = async () => {
+        try{
+            const res = await axios.get(environment+ApiEndPoints.logoutUrl, {withCredentials:true})
+            Dispatch(removeUser())
+            Cookies.remove('token');
+        }
+        catch(err) {
+            console.error(err)
+        }
+        
+    } 
+
     return (
         <>
             <div className="navbar bg-base-300" data-theme="cupcake" >
                 <div className="flex-1">
-                    <a className="btn btn-ghost text-xl">Dev</a>
+                    <Link to={Routes.feed} className="btn btn-ghost text-xl">Dev</Link>
                 </div>
                 <div className="flex-none gap-2">
                     {/* <div className="form-control">
@@ -24,13 +42,13 @@ const Navbar = () => {
                             tabIndex={0}
                             className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow">
                             <li>
-                                <a className="justify-between">
+                                <Link to={Routes.profile} className="justify-between">
                                     Profile
                                     <span className="badge">New</span>
-                                </a>
+                                </Link>
                             </li>
-                            <li><a>Settings</a></li>
-                            <li><a>Logout</a></li>
+                            {/* <li><a>Settings</a></li> */}
+                            <li onClick={handleLogout}><Link to={Routes.login}>Logout</Link></li>
                         </ul>
                     </div>
                 </div>

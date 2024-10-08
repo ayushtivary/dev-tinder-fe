@@ -1,19 +1,23 @@
 import axios from "axios"
 import { useState } from "react"
 import { environment } from "../Environment/environment"
-import { loginUrl } from "../Utils/Constants"
-import { useDispatch, useSelector } from "react-redux"
+import { useDispatch } from "react-redux"
 import { addUser } from "../Store/userSlice"
-
+import { useNavigate } from "react-router-dom"
+import { Routes, ApiEndPoints } from "../Utils/Constants"
 const Login = () => {
     const [emailId, setEmailId] = useState("Ayushtiwary92@gmail.com")
     const [password, setPassword]= useState("Abc@12345")
+    const [error, setError] = useState()
     const Dispatch = useDispatch()
+    const navigate = useNavigate()
     const handleLogin = async () => {
         try {
-            const res = await axios.post(environment+loginUrl, {emailId,password},{withCredentials:true})
+            const res = await axios.post(environment+ApiEndPoints.loginUrl, {emailId,password},{withCredentials:true})
             Dispatch(addUser(res.data))
+            return navigate(Routes.feed)
         }catch(err) {
+            setError(err?.response?.data)
             console.log(err)
         }
     }
@@ -50,7 +54,9 @@ const Login = () => {
                             </svg>
                             <input type="password" className="grow text-black" placeholder="Password" value={password}   onChange={(e) => setPassword(e.target.value)}  />
                         </label>
+                        <p className="text-red-600">{error}</p>
                     </div>
+                   
                     <div className="card-actions justify-end mt-1">
                         <button className="btn rounded-lg hover:bg-slate-800 w-60 hover:text-white text-lg" onClick={handleLogin} >Login</button>
                     </div>
