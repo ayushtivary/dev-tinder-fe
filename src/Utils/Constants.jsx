@@ -6,7 +6,8 @@ export const ApiEndPoints = {
     loginUrl: "login",
     profileUrl: "profile/view",
     logoutUrl: "logout",
-    feedUrl : "feed"
+    feedUrl : "feed",
+    saveProfileUrl : "profile/edit"
 }
 
 export const Routes = {

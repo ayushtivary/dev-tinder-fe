@@ -6,8 +6,8 @@ import { addUser } from "../Store/userSlice"
 import { useNavigate } from "react-router-dom"
 import { Routes, ApiEndPoints } from "../Utils/Constants"
 const Login = () => {
-    const [emailId, setEmailId] = useState("Ayushtiwary92@gmail.com")
-    const [password, setPassword] = useState("Abc@12345")
+    const [emailId, setEmailId] = useState("")
+    const [password, setPassword] = useState("")
     const [firstName, setFname] = useState("")
     const [lastName, setLname] = useState("")
     const [login, setLogin] = useState(true)
