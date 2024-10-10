@@ -8,7 +8,8 @@ export const ApiEndPoints = {
     logoutUrl: "logout",
     feedUrl : "feed",
     saveProfileUrl : "profile/edit",
-    fetchConnectionsUrl : "user/connections"
+    fetchConnectionsUrl : "user/connections",
+    fetchRequestUrl : "user/requests/received"
 }
 
 export const Routes = {
@@ -16,5 +17,6 @@ export const Routes = {
     profile : "/profile",
     login: "/login",
     feed: "/feed",
-    connection : "/connection"
+    connection : "/connection",
+    request : "/requests"
 }

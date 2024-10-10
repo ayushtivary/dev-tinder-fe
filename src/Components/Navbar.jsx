@@ -58,6 +58,11 @@ const Navbar = () => {
                                     Connections
                                 </Link>
                             </li>
+                            <li>
+                                <Link to={Routes.request} className="justify-between">
+                                    Requests
+                                </Link>
+                            </li>
                             {/* <li><a>Settings</a></li> */}
                             <li onClick={handleLogout}><Link to={Routes.login}>Logout</Link></li>
                         </ul>

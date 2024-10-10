@@ -21,7 +21,7 @@ const Login = () => {
             return navigate(Routes.feed)
         } catch (err) {
             setError(err?.response?.data)
-            console.log(err)
+            console.log(error)
         }
     }
     const handleSignin = (event) => {
@@ -34,6 +34,7 @@ const Login = () => {
             return navigate(Routes.login)
         }
         catch (err) {
+            setError(err?.response?.data)
             console.log(err)
         }
 

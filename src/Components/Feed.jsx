@@ -24,7 +24,7 @@ const Feed = () => {
     }, [])
     const feed = useSelector((store) => store.feed)
     return (
-        <div className="text-white mt-30 text-center  align-middle p-10 m-5">
+        <div className="text-white text-center  align-middle p-10">
             {/* {feed && feed.data.map((user) => (
                 <ProfileCards key={user._id} data={feed.data} />
             ))} */}

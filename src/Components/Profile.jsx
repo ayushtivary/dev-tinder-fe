@@ -23,17 +23,18 @@ const Profile = () => {
     }, [])
     const user = useSelector((store) => store.user)
     return user && (
-        <div className="flex p-10 mx-5 justify-between">
-            {/* EditProfile should take up half the width */}
-            <div className="w-1/2">
+        <div className="flex flex-col lg:flex-row p-10 mx-5 justify-between">
+            {/* EditProfile should take up full width on mobile and half on larger screens */}
+            <div className="w-full lg:w-1/2 mb-5 lg:mb-0">
                 <EditProfile data={user} />
             </div>
 
-            {/* ProfileCards should take up half the width */}
-            <div className="w-1/2 mt-5 max-h-[500px] text-center">
-                <ProfileCards data={user.data} isProfile={"false"} />
+            {/* ProfileCards should take up full width on mobile and half on larger screens */}
+            <div className="w-full lg:w-1/2 mt-5 lg:mt-5 max-h-[500px] text-center">
+                <ProfileCards data={user.data} isProfile={"profile"} />
             </div>
         </div>
+
 
     )
 }

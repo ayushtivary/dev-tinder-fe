@@ -1,5 +1,5 @@
 import axios from "axios";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { environment } from "../Environment/environment";
 import { ApiEndPoints } from "../Utils/Constants";
 import { useDispatch } from "react-redux";
@@ -13,10 +13,16 @@ const EditProfile = (data) => {
     const [gender, setGender] = useState(data?.data?.data?.gender);
     const [about, setAbout] = useState(data?.data?.data?.about);
     const dispatch = useDispatch()
+    const [showToast, setShowToast] = useState(false);
     const handleSaveProfile = async () => {
-        const res = await axios.post(environment + ApiEndPoints.saveProfileUrl, {firstName,lastName,age,gender,about, photoUrl}, {withCredentials:true})
+        const res = await axios.post(environment + ApiEndPoints.saveProfileUrl, { firstName, lastName, age, gender, about, photoUrl }, { withCredentials: true })
         dispatch(addUser(res.data))
+        setShowToast(true)
+        setTimeout(() => {
+            setShowToast(false);
+          }, 2000);
     }
+    console.log("show toast",showToast)
     return (
         <div className="flex justify-center mt-5 rounded-2xl bg-slate-200 w-full scrollbar-hidden">
             <div
@@ -84,6 +90,15 @@ const EditProfile = (data) => {
                             Save Profile
                         </button>
                     </div>
+                    {showToast &&
+                        <div>
+                            <div className="toast toast-top toast-center">
+                                <div className="alert alert-success">
+                                    <span>Profile Updated Successfully</span>
+                                </div>
+                            </div>
+                        </div>
+                    }
                 </div>
             </div>
         </div>
