@@ -18,9 +18,9 @@ const EditProfile = (data) => {
         dispatch(addUser(res.data))
     }
     return (
-        <div className="flex justify-center mt-5 rounded-2xl bg-slate-200">
+        <div className="flex justify-center mt-5 rounded-2xl bg-slate-200 w-full scrollbar-hidden">
             <div
-                className="card text-neutral-content w-96 text-center rounded-lg max-h-[700px]"
+                className="card text-neutral-content text-center rounded-lg w-11/12  max-h-[700px]"
                 data-theme="nord"
             >
                 <div
@@ -66,13 +66,13 @@ const EditProfile = (data) => {
                             />
                         </label>
 
-                        <select className="select select-bordered w-[82%] flex items-center gap-2 m-7 rounded-lg max-w-xs" value={gender}
+                        <select className="select select-bordered w-[90%] flex items-center gap-2 m-7 rounded-lg" value={gender}
                             onChange={(e) => setGender(e.target.value)}>
                             <option disabled selected>Gender</option>
                             <option>Male</option>
                             <option>Female</option>
                         </select>
-                        <textarea className="textarea textarea-bordered text-black w-[82%]"
+                        <textarea className="rounded-lg textarea textarea-bordered text-black w-[88%]"
                             placeholder="Bio"
                             value={about}
                             maxLength="200"

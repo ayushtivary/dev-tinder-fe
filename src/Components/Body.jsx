@@ -26,7 +26,7 @@ const Body = () => {
     }
  },[])
     return (
-        <div className=""> 
+        <div className="relative"> 
             {user && <Navbar/>}
             <Outlet/>
             {user && <Footer/>}

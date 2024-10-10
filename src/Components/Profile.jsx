@@ -20,13 +20,21 @@ const Profile = () => {
     }
     useEffect(() => {
         getProfile()
-    },[])
-    const user = useSelector((store)=> store.user)
+    }, [])
+    const user = useSelector((store) => store.user)
     return user && (
-        <div className="flex flex-wrap p-2 mx-5 justify-evenly">
-            <EditProfile data={user}/>
-            <div className="mt-5 max-h-[500px]"><ProfileCards data={user.data}/></div>
+        <div className="flex p-10 mx-5 justify-between">
+            {/* EditProfile should take up half the width */}
+            <div className="w-1/2">
+                <EditProfile data={user} />
+            </div>
+
+            {/* ProfileCards should take up half the width */}
+            <div className="w-1/2 mt-5 max-h-[500px] text-center">
+                <ProfileCards data={user.data} isProfile={"false"} />
+            </div>
         </div>
+
     )
 }
 

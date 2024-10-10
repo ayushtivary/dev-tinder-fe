@@ -6,21 +6,23 @@ import Cookies from 'js-cookie';
 import axios from "axios";
 import { environment } from "../Environment/environment";
 import { removeFeed } from "../Store/feedSlice";
+import { removeConnections } from "../Store/connectionSlice";
 const Navbar = () => {
-    const user = useSelector((store)=> store.user)
+    const user = useSelector((store) => store.user)
     const Dispatch = useDispatch()
     const handleLogout = async () => {
-        try{
-            const res = await axios.get(environment+ApiEndPoints.logoutUrl, {withCredentials:true})
+        try {
+            const res = await axios.get(environment + ApiEndPoints.logoutUrl, { withCredentials: true })
             Dispatch(removeUser())
             Dispatch(removeFeed())
+            Dispatch(removeConnections())
             Cookies.remove('token');
         }
-        catch(err) {
+        catch (err) {
             console.error(err)
         }
-        
-    } 
+
+    }
 
     return (
         <>
@@ -29,15 +31,17 @@ const Navbar = () => {
                     <Link to={Routes.feed} className="btn btn-ghost text-xl">Dev</Link>
                 </div>
                 <div className="flex-none gap-2">
-                    {/* <div className="form-control">
-          <input type="text" placeholder="Search" className="input input-bordered w-24 md:w-auto" />
-        </div> */}
                     <div className="dropdown dropdown-end mx-5">
-                        <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar">
-                            <div className="w-10 rounded-full">
-                                <img
-                                    alt="Tailwind CSS Navbar component"
-                                    src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp" />
+                        <div className="flex">
+                            <p className="mt-3 px-4 font-medium">
+                                Welcome!  {user.data.firstName}
+                            </p>
+                            <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar">
+                                <div className="w-10 rounded-full">
+                                    <img
+                                        alt="Tailwind CSS Navbar component"
+                                        src={user.data.photoUrl} />
+                                </div>
                             </div>
                         </div>
                         <ul
@@ -47,6 +51,11 @@ const Navbar = () => {
                                 <Link to={Routes.profile} className="justify-between">
                                     Profile
                                     <span className="badge">New</span>
+                                </Link>
+                            </li>
+                            <li>
+                                <Link to={Routes.connection} className="justify-between">
+                                    Connections
                                 </Link>
                             </li>
                             {/* <li><a>Settings</a></li> */}
