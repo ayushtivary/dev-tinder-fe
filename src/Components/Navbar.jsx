@@ -5,7 +5,7 @@ import { removeUser } from "../Store/userSlice"
 import Cookies from 'js-cookie';
 import axios from "axios";
 import { environment } from "../Environment/environment";
-import { removeFeed } from "../Store/feedSlice";
+// import { removeFeed } from "../Store/feedSlice";
 import { removeConnections } from "../Store/connectionSlice";
 const Navbar = () => {
     const user = useSelector((store) => store.user)
@@ -14,7 +14,7 @@ const Navbar = () => {
         try {
             const res = await axios.get(environment + ApiEndPoints.logoutUrl, { withCredentials: true })
             Dispatch(removeUser())
-            Dispatch(removeFeed())
+            // Dispatch(removeFeed())
             Dispatch(removeConnections())
             Cookies.remove('token');
         }

@@ -9,7 +9,9 @@ export const ApiEndPoints = {
     feedUrl : "feed",
     saveProfileUrl : "profile/edit",
     fetchConnectionsUrl : "user/connections",
-    fetchRequestUrl : "user/requests/received"
+    fetchRequestUrl : "user/requests/received",
+    requestResponseUrl : "request/review/",
+    sendRequestUrl : "request/send/"
 }
 
 export const Routes = {
