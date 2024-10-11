@@ -18,17 +18,34 @@ const Feed = () => {
         }
     }
     useEffect(() => {
-        if (!feed) {
-            getFeed()
-        }
+        getFeed()
     }, [])
     const feed = useSelector((store) => store.feed)
+    if (feed?.data?.length == 0) {
+        return (
+            <div className="toast toast-top toast-center mt-20">
+                <div className="alert alert-success">
+                    <span className="text-white">Oops! No More users found in feed</span>
+                </div>
+            </div>
+        )
+    }
+    console.log("feed length", feed)
     return (
         <div className="text-white text-center  align-middle p-10">
             {/* {feed && feed.data.map((user) => (
                 <ProfileCards key={user._id} data={feed.data} />
             ))} */}
-            {feed && <ProfileCards data={feed.data[0]} isProfile={true}/> }
+            {feed !== null ?
+                (<ProfileCards data={feed?.data[0]} isProfile={true} />) :
+                (
+                    <div className="toast toast-top toast-center mt-20">
+                        <div className="alert alert-success">
+                            <span className="text-white">Oops! No More users found in feed</span>
+                        </div>
+                    </div>
+                )
+            }
         </div>
     )
 }

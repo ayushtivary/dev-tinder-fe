@@ -12,20 +12,21 @@ const ProfileCards = ({ data, isProfile }) => {
     const handleClick = useCallback((status) => {
         setAccepted({ clickstatus: true, message: status, data: data?._id }); // Update context value
     }, [data, setAccepted]);
-
+    const checkFeed = useSelector((store)=>store.feed)
     const userData = isProfile === "requests"? data?.fromUserId : data;
     const { _id, photoUrl, firstName, lastName, age, gender, about } = userData;
     const handleSendRequest = async (status, userId) => {
         try {
             const res = await axios.post(environment + ApiEndPoints.sendRequestUrl + status + '/' + userId, {}, { withCredentials: true });
             console.log("userId", userId)
+            console.log("Feed after update",checkFeed)
             dispatch(removeUserFromFeed(userId));
         } catch (err) {
             console.error(err);
         }
     };
-    const checkFeed = useSelector((store)=>store.feed)
-    console.log("Feed after update")
+    
+   
     return (
         <div className="flex justify-center text-center">
             <div className="card bg-slate-200 w-96 h-[31.5rem] shadow-xl">

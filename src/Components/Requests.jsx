@@ -23,7 +23,7 @@ const Requests = () => {
             console.error(err);
         }
     };
-    console.log("request fedd",fetchRequest)
+    console.log("request feed", fetchRequest)
     useEffect(() => {
         fetchConnectionRequests();
     }, []);
@@ -36,7 +36,6 @@ const Requests = () => {
                 { withCredentials: true }
             );
             dispatch(removeRequest(accepted.data)); // Remove from Redux store
-            // Optionally: filter the removed card from the UI (if fetchRequest is stored locally).
         } catch (err) {
             console.error(err);
         }
@@ -45,7 +44,6 @@ const Requests = () => {
     useEffect(() => {
         if (accepted.clickstatus) {
             setConnectionRequest();
-            // Instantly remove the card from the UI by filtering it out
             setAccepted((prev) => ({ ...prev, clickstatus: false }));
         }
     }, [accepted.clickstatus]);
@@ -64,7 +62,7 @@ const Requests = () => {
 
     return (
         <Context.Provider value={{ accepted, setAccepted }}>
-            <div className="flex justify-evenly flex-wrap text-center text-white align-middle p-10 m-5">
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mt-10 text-center text-white align-middle p-10">
                 {fetchRequest.length > 0 ? fetchRequest.map((user) => (
                     <ProfileCards
                         className="mt-2"
