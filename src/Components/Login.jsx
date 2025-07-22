@@ -5,6 +5,7 @@ import { useDispatch } from "react-redux";
 import { addUser } from "../Store/userSlice";
 import { useNavigate } from "react-router-dom";
 import { Routes, ApiEndPoints } from "../Utils/Constants";
+import { loginApi, signupApi, logoutApi } from "../Api/AuthApi";
 
 const Login = () => {
   const [emailId, setEmailId] = useState("");
@@ -19,10 +20,7 @@ const Login = () => {
 
   const handleLogin = async () => {
     try {
-      const res = await axios.post(environment + ApiEndPoints.loginUrl, {
-        emailId,
-        password,
-      });
+      const res = await loginApi({ emailId, password });
       Dispatch(addUser(res.data));
       return navigate(Routes.feed);
     } catch (err) {
@@ -38,7 +36,7 @@ const Login = () => {
 
   const handleSignUp = async () => {
     try {
-      const res = await axios.post(environment + ApiEndPoints.signupUrl, {
+      const res = await signupApi({
         firstName,
         lastName,
         emailId,
