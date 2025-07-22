@@ -1,5 +1,5 @@
-import axios from "axios";
-import { useEffect, useState } from "react";
+import axios from "../Middleware/axios-wrapper";
+import { useState } from "react";
 import { environment } from "../Environment/environment";
 import { ApiEndPoints } from "../Utils/Constants";
 import { useDispatch } from "react-redux";
@@ -14,8 +14,7 @@ const EditProfile = (data) => {
   const [about, setAbout] = useState(data?.data?.data?.about);
   const dispatch = useDispatch();
   const [showToast, setShowToast] = useState(false);
-  console.log("data", data?.data?.data);
-  console.log("photoUrl", photoUrl);
+
   const handleSaveProfile = async () => {
     const formData = new FormData();
     formData.append("firstName", firstName);
@@ -33,13 +32,7 @@ const EditProfile = (data) => {
     try {
       const res = await axios.post(
         environment + ApiEndPoints.saveProfileUrl,
-        formData,
-        {
-          withCredentials: true,
-          headers: {
-            "Content-Type": "multipart/form-data", // required for FormData
-          },
-        }
+        formData
       );
       dispatch(addUser(res.data));
       setShowToast(true);
@@ -50,7 +43,7 @@ const EditProfile = (data) => {
       console.error("Error saving profile:", error);
     }
   };
-  console.log("show toast", showToast);
+
   return (
     <div className="flex justify-center w-full rounded-2xl p-6 ">
       <div
