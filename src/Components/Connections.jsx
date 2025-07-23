@@ -1,20 +1,19 @@
-import axios from "../Middleware/axios-wrapper";
-import { environment } from "../Environment/environment";
-import { ApiEndPoints } from "../Utils/Constants";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { addConnections } from "../Store/connectionSlice";
 import ProfileCards from "./ProfileCards";
+import Loader from "../Utils/Loader";
+import { connectionApi } from "../Api/FeedApi";
 
 const Connections = () => {
+  const [loading, setLoading] = useState(true);
   const dispatch = useDispatch();
   const fetchConnectionStore = useSelector((store) => store.connection);
   const [isConnectionFound, setIsConnectionFound] = useState(false);
   const fetchConnections = async () => {
     try {
-      const res = await axios.get(
-        environment + ApiEndPoints.fetchConnectionsUrl
-      );
+      const res = await connectionApi();
+      setLoading(true);
       dispatch(addConnections(res.data.data));
       if (res.data.data.length == 0) {
         setIsConnectionFound(false);
@@ -24,12 +23,20 @@ const Connections = () => {
     } catch (err) {
       console.log(err);
     }
+    setLoading(false);
   };
   useEffect(() => {
     // if (!fetchConnectionStore) {
     fetchConnections();
     // }
   }, []);
+
+  // If loading, show the Loader component
+  if (loading) {
+    return <Loader />;
+  }
+
+  // If no connections found, show a message
   if (!isConnectionFound) {
     return (
       <div>

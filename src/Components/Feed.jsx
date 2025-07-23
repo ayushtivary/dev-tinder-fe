@@ -1,21 +1,25 @@
-import { environment } from "../Environment/environment";
-import { ApiEndPoints } from "../Utils/Constants";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { addFeed } from "../Store/feedSlice";
 import ProfileCards from "./ProfileCards";
-import axios from "../Middleware/axios-wrapper";
+import { feedApi } from "../Api/FeedApi"; // Import the feed API function
+import Loader from "../Utils/Loader";
 
 const Feed = () => {
   const dispatch = useDispatch();
+  const [loading, setLoading] = useState(true);
   const getFeed = async () => {
     try {
-      const res = await axios.get(environment + ApiEndPoints.feedUrl);
+      const res = await feedApi();
+      setLoading(true);
       dispatch(addFeed(res.data));
     } catch (err) {
       console.log(err);
     }
+    setLoading(false);
   };
+
+  // Fetch feed data when the component mounts
   useEffect(() => {
     getFeed();
   }, []);
@@ -29,6 +33,13 @@ const Feed = () => {
       </div>
     );
   }
+
+  // If loading, show the Loader component
+  if (loading) {
+    return <Loader />;
+  }
+
+  // Render the feed data
   return (
     <div className="text-white text-center  align-middle p-10">
       {/* {feed && feed.data.map((user) => (

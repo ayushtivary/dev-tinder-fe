@@ -1,12 +1,11 @@
 import { Outlet, useNavigate } from "react-router-dom"
 import Navbar from "./Navbar"
 import Footer from "./Footer"
-import { useDispatch, useSelector } from "react-redux"
-import { environment } from "../Environment/environment"
-import { addUser } from "../Store/userSlice"
-import { useEffect } from "react"
-import axios from "../Middleware/axios-wrapper";
-import { Routes, ApiEndPoints } from "../Utils/Constants";
+import { useDispatch, useSelector } from "react-redux";
+import { addUser } from "../Store/userSlice";
+import { useEffect } from "react";
+import { Routes } from "../Utils/Constants";
+import { fetchPhotoUrlApi } from "../Api/ProfileApi";
 
 const Body = () => {
   const user = useSelector((store) => store.user);
@@ -14,7 +13,7 @@ const Body = () => {
   const navigate = useNavigate();
   const fetchUser = async () => {
     try {
-      const res = await axios.get(environment + ApiEndPoints.profileUrl);
+      const res = await fetchPhotoUrlApi();
       dispatch(addUser(res.data));
     } catch (err) {
       navigate(Routes.login);

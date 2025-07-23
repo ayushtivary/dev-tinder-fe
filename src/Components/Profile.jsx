@@ -1,26 +1,35 @@
-import axios from "../Middleware/axios-wrapper";
-import { environment } from "../Environment/environment";
-import { ApiEndPoints, Routes } from "../Utils/Constants";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { addUser } from "../Store/userSlice";
 import EditProfile from "./EditProfile";
 import ProfileCards from "./ProfileCards";
+import { profileApi } from "../Api/ProfileApi";
+import Loader from "../Utils/Loader";
 
 const Profile = () => {
+  const [loading, setLoading] = useState(true);
   const dispatch = useDispatch();
   const getProfile = async () => {
     try {
-      const res = await axios.get(environment + ApiEndPoints.profileUrl);
+      const res = await profileApi();
+      setLoading(true);
       dispatch(addUser(res.data));
     } catch (err) {
       console.error(err);
     }
+    setLoading(false);
   };
+
   useEffect(() => {
     getProfile();
   }, []);
+
+  // Get user data from Redux store
   const user = useSelector((store) => store.user);
+
+  if (loading) {
+    return <Loader />;
+  }
   return (
     user && (
       <div className="flex flex-col lg:flex-row p-10 mx-5 justify-between">

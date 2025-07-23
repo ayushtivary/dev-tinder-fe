@@ -6,6 +6,7 @@ import { addRequest, removeRequest } from "../Store/requestSlice";
 import { useEffect, useState } from "react";
 import ProfileCards from "./ProfileCards";
 import Context from "../Utils/Context"; // Import the context
+import { updateProfileRequestApi } from "../Api/ProfileApi"; // Import the API function
 
 const Requests = () => {
   const fetchRequest = useSelector((store) => store.request);
@@ -30,12 +31,9 @@ const Requests = () => {
 
   const setConnectionRequest = async () => {
     try {
-      const res = await axios.post(
-        environment +
-          ApiEndPoints.requestResponseUrl +
-          accepted.message +
-          "/" +
-          accepted.data
+      const res = await updateProfileRequestApi(
+        accepted.message,
+        accepted.data
       );
       dispatch(removeRequest(accepted.data)); // Remove from Redux store
     } catch (err) {
