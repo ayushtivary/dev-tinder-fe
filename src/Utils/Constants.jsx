@@ -18,4 +18,5 @@ export const Routes = {
   feed: "/feed",
   connection: "/connection",
   request: "/requests",
+  notifications: "/notification-progress",
 };

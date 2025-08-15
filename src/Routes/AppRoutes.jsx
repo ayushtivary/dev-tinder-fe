@@ -7,6 +7,7 @@ const Login = lazy(() => import("../Components/Login"));
 const Connections = lazy(() => import("../Components/Connections"));
 const Profile = lazy(() => import("../Components/Profile"));
 const Requests = lazy(() => import("../Components/Requests"));
+const NotificationProgress = lazy(() => import("../Components/NotificationProgress"));
 
 const AppRoutes = () => (
   <Suspense fallback={<div className="flex justify-center items-center h-screen">Loading...</div>}>
@@ -17,6 +18,7 @@ const AppRoutes = () => (
         <Route path="/connection" element={<Connections />} />
         <Route path="/profile" element={<Profile />} />
         <Route path="/requests" element={<Requests />} />
+        <Route path="/notification-progress" element={<NotificationProgress />} />
       </Route>
     </Routes>
   </Suspense>

@@ -86,6 +86,14 @@ const Navbar = () => {
                   Requests
                 </Link>
               </li>
+              <li>
+                <Link
+                  to={Routes.notifications}
+                  className="hover:bg-gray-700 hover:text-green-400"
+                >
+                  Notifications
+                </Link>
+              </li>
               <li onClick={handleLogout}>
                 <Link
                   to={Routes.login}
